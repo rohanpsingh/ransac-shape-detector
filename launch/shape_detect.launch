@@ -1,0 +1,22 @@
+<launch>
+  <arg name="debugging" default="true" />
+  <arg name="launch_prefix" default="" />
+
+  <group>
+
+    <!-- object pose estimator -->
+    <node pkg="shape_detect" type="shape_detect" name="shape_detect" output="screen" launch-prefix="$(arg launch_prefix)">
+
+    	<!-- subscribed topics -->
+  	<remap from="~input_cloud" to="/camera/depth/points"/>
+	
+    <rosparam subst_value="true">
+    max_dist: 5
+    plane_min_points: 2000
+    cylinder_min_points: 100
+    voxel_leaf_size: 0.01    
+    </rosparam>
+    </node>
+
+  </group>
+</launch>
